@@ -1,5 +1,5 @@
-# Carcass.filter
-# Version 2.3
+# Carkasjak's Simple Speed Filter
+# Version 2.2
 # Get the latest version at https://github.com/spookyglowingbadger/carcass-filter
 # 
 # This filter is heavily inspired by NeverSink and some sections are borrowed from it, but it is stricter and more minimalistic than even NeverSink's Uber-Strict
@@ -143,19 +143,49 @@ Show
 	SetFontSize 45
 	SetBorderColor 74 230 58             # BORDERCOLOR:	 Labyrinth, Quest, Shaper Orbs
 
-Hide # Leaguestones that suck if they aren't magic
-	Class "Leaguestone"
-	BaseType "Torment Leaguestone" "Prophecy Leaguestone" "Anarchy Leaguestone" "Tempest Leaguestone"
-	Rarity = Normal
-	SetFontSize 45
-	SetBorderColor 229 160 12            # BORDERCOLOR: 	Brownish gold. Legacy League theme
+#===============================================================================================================
+# [[1600]] Leaguestones - Tierlists
+#===============================================================================================================
 
-Show # Basetypes for leaguestones in comment in case you only want to show some of them. By default I'll show them all.
-	Class "Leaguestone"
-#	BaseType "Breach Leaguestone" "Essence Leaguestone" "Prophecy Leaguestone" "Perandus Leaguestone" "Talisman Leaguestone" "Warbands Leaguestone" "Tempest Leaguestone" "Torment Leaguestone" "Bloodlines Leaguestone" "Rampage Leaguestone" "Beyond Leaguestone" "Ambush Leaguestone" "Invasion Leaguestone" "Domination Leaguestone" "Nemesis Leaguestone" "Anarchy Leaguestone" "Onslaught Leaguestone"
+Show # %TB-Leaguestone-Value
+	Class Leaguestone
+	BaseType "Perandus" "Breach" "Nemesis" "Bloodline"
+	Rarity = Magic
+	ItemLevel >= 67
 	SetFontSize 45
-	SetBorderColor 229 160 12            # BORDERCOLOR: 	Brownish gold. Legacy League theme
-	PlayAlertSound 2 300
+	SetTextColor 50 0 100 255            # TEXTCOLOR:	 LeagueStone Magic
+	SetBorderColor 50 0 100 255          # BORDERCOLOR:	 LeagueStone Magic
+	SetBackgroundColor 90 240 140 255    # BACKGROUND:	 LeagueStone T1
+	PlayAlertSound 2 300                 # DROPSOUND:	 Value Drop: Currency, fragments
+
+Show
+	Class Leaguestone
+	Rarity >= Magic
+	SetFontSize 42
+	SetTextColor 50 0 100 255            # TEXTCOLOR:	 LeagueStone Magic
+	SetBorderColor 50 0 100 255          # BORDERCOLOR:	 LeagueStone Magic
+	SetBackgroundColor 100 220 145 255   # BACKGROUND:	 LeagueStone T2
+	PlayAlertSound 2 300                 # DROPSOUND:	 Value Drop: Currency, fragments
+
+Show # %TB-Leaguestone-Value
+	Class Leaguestone
+	BaseType "Perandus" "Breach" "Nemesis" "Bloodline"
+	Rarity = Normal
+	ItemLevel >= 67
+	SetFontSize 42
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 0 0 255             # BORDERCOLOR:	 Cosmetic: Highlight good drops
+	SetBackgroundColor 100 220 145 255   # BACKGROUND:	 LeagueStone T2
+	PlayAlertSound 2 300                 # DROPSOUND:	 Value Drop: Currency, fragments
+
+Show
+	Class Leaguestone
+	Rarity = Normal
+	SetFontSize 40
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 0 0 255             # BORDERCOLOR:	 Cosmetic: Highlight good drops
+	SetBackgroundColor 70 160 100 230    # BACKGROUND:	 LeagueStone T3
+	PlayAlertSound 2 300                 # DROPSOUND:	 Value Drop: Currency, fragments
 
 Show
 	Class "Amulets"
@@ -176,10 +206,17 @@ Hide # I'm sick of Breach Rings, so I'll hide them by default. They're almost ne
 	SetBackgroundColor 65 20 80          # BACKGROUND:	Breach
 
 Show # Rare Rings and Amulets are always worth picking up due to their small size and high potential value
-	Class "Rings" "Amulets"
+	Class "Rings" "Amulets" "Belts"
 	Rarity = Rare
 	SetFontSize 45
 
+Show #$trinkets, jewels %H4
+	Class Jewel
+	Rarity <= Magic
+	SetFontSize 30
+	SetTextColor 0 100 255               # TEXTCOLOR:	 Jewel: Magic
+	SetBorderColor 0 75 250              # BORDERCOLOR:	 Cosmetic: Magic Jewels
+	SetBackgroundColor 0 20 40 255       # BACKGROUND:	 Jewel: Magic
 Show # Same thing applies to rare Jewels
 	Class "Jewel"
 	Rarity = Rare
@@ -195,12 +232,18 @@ Show # 84+ good bases to identify
 	SetFontSize 45
 	SetBorderColor 255 255 255 255
 
-Hide # 75+ good bases to identify (Change this to Hide if you only want to see 84+)
-	BaseType "Hubris Circlet" "Vaal Regalia" "Sorcerer Boots" "Sorcerer Gloves" "Titanium Spirit Shield" "Two-Toned Boots" "Fingerless Silk Gloves"
+Show # 75+ good bases to identify (Change this to Hide if you only want to see 84+)
+	BaseType "Hubris Circlet" "Vaal Regalia" "Sorcerer Boots" "Sorcerer Gloves" "Titanium Spirit Shield" "Two-Toned Boots" "Fingerless Silk Gloves" "Ambusher" "Platinum Kris" "Imperial Skean" "Ezomyte Dagger"
 	Rarity = Rare
 	ItemLevel >= 75
 	SetFontSize 45
-
+	
+Show # 75+ good bases to identify (Change this to Hide if you only want to see 84+)
+	Class Dagger
+	BaseType "Sai"
+	Rarity = Rare
+	ItemLevel >= 75
+	SetFontSize 45
 # Lists of other top tier rare BaseTypes you may want to add if the meta shifts:
 # Armour: "Astral Plate" "Glorious Plate" "Titan Greaves" "Titan Gauntlets" "Eternal Burgonet" "Royal Burgonet" "Pinnacle Tower Shield" "Spiked Gloves"
 # Armour/ES: "Saintly Chainmail" "Crusader Boots" "Crusader Gloves" "Praetor Crown" "Archon Kite Shield" "Bone Helmet"
@@ -231,17 +274,17 @@ Hide # Scrolls of Wisdom
 	BaseType "Scroll of Wisdom"
 	SetFontSize 45
 
-Hide # Transmutes
+Show # Transmutes
 	Class "Currency"
 	BaseType "Orb of Transmutation"
 	SetFontSize 45
 
-Hide # Augments
+Show # Augments
 	Class "Currency"
 	BaseType "Orb of Augmentation"
 	SetFontSize 45
 
-Hide # Armourer's
+Show # Armourer's
 	Class "Currency"
 	BaseType "Armourer's"
 	SetFontSize 45
@@ -295,7 +338,7 @@ Show # Good Essences
 	SetBackgroundColor 30 144 255        # BACKGROUND:	 Blue
 	PlayAlertSound 2 300                 # DROPSOUND:	 Value Drop: Currency, fragments
 	
-Hide # Leveling essences
+Show # Leveling essences
 	BaseType "Wailing Essence of" "Weeping Essence of" "Muttering Essence of" "Whispering Essence of"
 	SetFontSize 45
 	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
@@ -432,6 +475,11 @@ Show # T11
 # [3004] Yellow Maps - T6-T10
 # -------------------------------------------------------------------	
 
+Show # Favorite yellow maps (will be shown even if the applicable tier is hidden)		
+		Class "Maps"		
+		BaseType "Shaped Acid Lakes Map" "Tropical Island Map" "Atoll Map" "Promenade Map" "Shaped Beach Map" "Shaped Jungle Valley Map" "Shaped Arid Lake Map" "Cemetery Map"		
+		SetFontSize 45		
+		SetBorderColor 254 213 0 255
 Show # T10
 	DropLevel >= 77
 	Class "Maps"
@@ -439,7 +487,7 @@ Show # T10
 	SetBorderColor 254 213 0 255
 	PlayAlertSound 4 300                 # DROPSOUND:	 T1 maps
 
-Hide # T9
+Show # T9
 	DropLevel >= 76
 	Class "Maps"
 	SetFontSize 45
@@ -475,6 +523,7 @@ Hide # T5
 Hide # T4
 	DropLevel >= 71
 	Class "Maps"
+	
 	SetFontSize 45
 
 Hide # T3
@@ -491,6 +540,7 @@ Hide # T1
 	DropLevel < 69
 	Class "Maps"
 	SetFontSize 45
+
 
 # -------------------------------------------------------------------
 # [3006] Map Fragments
@@ -585,10 +635,158 @@ Show # Safety line for Misc Map Items class
 # [4001] Uniques
 # -------------------------------------------------------------------
 
-Show # Just show every unique because too lazy to maintain tiers.
+#------------------------------------
+#   [1701] Exceptions
+#------------------------------------
+
+Show
+	SocketGroup WWWWWW
+	BaseType "Simple Robe"
 	Rarity Unique
 	SetFontSize 45
-	PlayAlertSound 3 300
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 175 96 37 255         # BORDERCOLOR:	 Unique Item
+	SetBackgroundColor 175 96 37 255     # BACKGROUND:	 T2 unique
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+Show # 6-Links
+	LinkedSockets 6
+	Rarity Unique
+	SetFontSize 45
+	SetTextColor 175 96 37 255           # TEXTCOLOR:	 Uniques
+	SetBorderColor 175 96 37 255         # BORDERCOLOR:	 Unique Item
+	SetBackgroundColor 255 255 255 255   # BACKGROUND:	 T1 Global High Value Drop
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+#------------------------------------
+#   [1702] Tier 1 uniques
+#------------------------------------
+
+Show # %TB-Uniques-T1-Flasks
+	BaseType "Stibnite Flask" "Ruby Flask" "Topaz Flask" "Sapphire Flask" "Silver Flask"
+	Rarity Unique
+	SetFontSize 45
+	SetTextColor 175 96 37 255           # TEXTCOLOR:	 Uniques
+	SetBorderColor 175 96 37 255         # BORDERCOLOR:	 Unique Item
+	SetBackgroundColor 255 255 255 255   # BACKGROUND:	 T1 Global High Value Drop
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+Show # %TB-Uniques-T1-Wep
+	BaseType "Void Axe" "Prophecy Wand" "Jewelled Foil" "Royal Axe" "Cutlass"
+	Rarity Unique
+	SetFontSize 45
+	SetTextColor 175 96 37 255           # TEXTCOLOR:	 Uniques
+	SetBorderColor 175 96 37 255         # BORDERCOLOR:	 Unique Item
+	SetBackgroundColor 255 255 255 255   # BACKGROUND:	 T1 Global High Value Drop
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+Show # %TB-Uniques-T1-Arm
+	BaseType "Sorcerer Boots" "Occultist's Vestment" "Crusader Boots" "Rawhide Boots" "Ezomyte Tower Shield" "Deicide Mask" "Glorious Plate" "Ezomyte Burgonet" "Assassin's Garb"
+	Rarity Unique
+	SetFontSize 45
+	SetTextColor 175 96 37 255           # TEXTCOLOR:	 Uniques
+	SetBorderColor 175 96 37 255         # BORDERCOLOR:	 Unique Item
+	SetBackgroundColor 255 255 255 255   # BACKGROUND:	 T1 Global High Value Drop
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+Show # %TB-Uniques-T1-Misc
+	BaseType "Greatwolf Talisman"
+	Rarity Unique
+	SetFontSize 45
+	SetTextColor 175 96 37 255           # TEXTCOLOR:	 Uniques
+	SetBorderColor 175 96 37 255         # BORDERCOLOR:	 Unique Item
+	SetBackgroundColor 255 255 255 255   # BACKGROUND:	 T1 Global High Value Drop
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+#------------------------------------
+#   [1703] Tier 2 uniques
+#------------------------------------
+
+Show # 5-Links
+	LinkedSockets = 5
+	Rarity Unique
+	SetFontSize 45
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 0 0 255             # BORDERCOLOR:	 Cosmetic: Highlight good drops
+	SetBackgroundColor 175 96 37 255     # BACKGROUND:	 T2 unique
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+Show # %TB-Uniques-T2-Flasks
+	BaseType "Granite Flask" "Bismuth Flask"
+	Rarity Unique
+	SetFontSize 42
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 0 0 255             # BORDERCOLOR:	 Cosmetic: Highlight good drops
+	SetBackgroundColor 175 96 37 255     # BACKGROUND:	 T2 unique
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+Show # %TB-Uniques-T2-Wep
+	BaseType "Granite Flask" "Fiend Dagger" "Imperial Staff" "Carnal Sceptre" "Siege Axe" "Abyssal Axe" "Sacrificial Garb" "Ritual Sceptre" "Judgement Staff" "Vaal Sceptre" "Imperial Maul" "Steelhead" "Carnal Sceptre" "Terror Maul"
+	Rarity Unique
+	SetFontSize 42
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 0 0 255             # BORDERCOLOR:	 Cosmetic: Highlight good drops
+	SetBackgroundColor 175 96 37 255     # BACKGROUND:	 T2 unique
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+Show # %TB-Uniques-T2-Arm
+	BaseType "Jingling Spirit Shield" "Savant's Robe" "Gladiator Plate" "Vaal Regalia" "Sacrificial Garb" "Archon Kite Shield" "Legion Gloves" "Raven Mask" "Champion Kite Shield" "Nightmare Bascinet" "Clasped Mitts" "Wyrmscale Doublet"
+	Rarity Unique
+	SetFontSize 42
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 0 0 255             # BORDERCOLOR:	 Cosmetic: Highlight good drops
+	SetBackgroundColor 175 96 37 255     # BACKGROUND:	 T2 unique
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+Show # %TB-Uniques-T2-Misc
+	BaseType "Gold Ring" "Crystal Belt" "Citrine Amulet"
+	Rarity Unique
+	SetFontSize 42
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 0 0 255             # BORDERCOLOR:	 Cosmetic: Highlight good drops
+	SetBackgroundColor 175 96 37 255     # BACKGROUND:	 T2 unique
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+#------------------------------------
+#   [1704] Multi-Unique bases.
+#------------------------------------
+# These bases have multiple uniques. One of the uniques, is a high value one
+# While others are cheap. We give them a high quality display, while making a normal unique
+# Sound to prevent false excitement.
+
+Show # %TB-MultiBase-Uniques
+	BaseType "Ebony Tower Shield" "Onyx Amulet" "Goathide Boots" "Two-Stone Ring"
+	Rarity Unique
+	SetFontSize 42
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 0 0 255             # BORDERCOLOR:	 Cosmetic: Highlight good drops
+	SetBackgroundColor 175 96 37 255     # BACKGROUND:	 T2 unique
+	PlayAlertSound 3 300                 # DROPSOUND:	 Random uniques, 20qual gems
+
+#------------------------------------
+#   [1705] Prophecy-Material Uniques
+#------------------------------------
+
+Show # %TB-Uniques-Fated
+	BaseType "Iron Ring" "Coral Ring" "Jade Amulet" "Plate Vest" "Ornate Sword" "Scholar Boots" "Iron Staff" "Spiraled Wand" "Sledgehammer" "Long Bow" "Crude Bow" "Royal Bow" "Woodsplitter" "Jade Hatchet" "Painted Buckler" "Plank Kite Shield" "War Buckler" "Gilded Sallet" "Iron Hat" "Vine Circlet" "Goathide Gloves" "Coral Amulet" "Fire Arrow Quiver" "Serrated Arrow Quiver" "Death Bow"
+	Rarity Unique
+	SetFontSize 40
+	SetTextColor 175 96 37 255           # TEXTCOLOR:	 Uniques
+	SetBorderColor 100 37 255 200        # BORDERCOLOR:	 Cosmetic: Fated Uniques
+	SetBackgroundColor 15 0 25 255       # BACKGROUND:	 Uniques: Prophecy Base
+	PlayAlertSound 3 300                 # DROPSOUND:	 Random uniques, 20qual gems
+
+#------------------------------------
+#   [1706] Random Uniques
+#------------------------------------
+
+Show # T3
+	Rarity Unique
+	SetFontSize 40
+	SetTextColor 175 96 37 255           # TEXTCOLOR:	 Uniques
+	SetBorderColor 175 96 37 255         # BORDERCOLOR:	 Unique Item
+	SetBackgroundColor 0 0 0 255         # BACKGROUND:	 T6-10 maps, currency, talismans
+	PlayAlertSound 3 300                 # DROPSOUND:	 Random uniques, 20qual gems
 
 # -------------------------------------------------------------------
 # [5001] Gems
@@ -608,7 +806,7 @@ Show # Quality Gems
 
 Show # Good Drop Only Gems
 	Class "Gem"
-	BaseType "Empower" "Enlighten" "Added Chaos Damage" "Vaal Breach" "Portal" "Vaal Haste" "Vaal Discipline" "Item Quantity"
+	BaseType "Empower" "Enlighten" "Added Chaos Damage" "Vaal Breach" "Portal" "Vaal Haste" "Vaal Discipline" "Vaal Grace" "Item Quantity"
 	SetFontSize 45
 
 Hide # Other gems
@@ -631,10 +829,81 @@ Hide # Hide non-unique flasks that don't get caught by the 20 quality block
 # [7001] Divination Cards
 # -------------------------------------------------------------------
 
-Show # Just show all cards because too lazy to maintain tiers.
+#------------------------------------
+#   [1401] Exceptions to prevent ident. mistakes
+#------------------------------------
+
+Show # %TB-Divination-Exception
 	Class "Divination"
+	BaseType "The Wolf's Shadow"
+	SetFontSize 38
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 100 150 255         # BORDERCOLOR:	 Cosmetic: T4 Divination
+	SetBackgroundColor 145 215 230 225   # BACKGROUND:	 T4 Divination
+	PlayAlertSound 2 300                 # DROPSOUND:	 Value Drop: Currency, fragments
+
+#------------------------------------
+#   [1402] T1 - Top tier cards
+#------------------------------------
+
+Show # %TB-Divination-T1
+	Class "Divination"
+	BaseType "House of Mirrors" "The Doctor" "The Fiend" "Hunter's Reward" "The Dragon's Heart" "Mawr Blaidd" "The Last One Standing" "The Offering" "The Ethereal" "The Queen" "Abandoned Wealth" "The Brittle Emperor" "The Immortal" "The Artist" "Wealth and Power" "Pride Before the Fall" "The Enlightened" "The King's Heart" "Bowyer's Dream" "The Hunger" "The Celestial Justicar" "Spark and the Flame" "Polymath"
 	SetFontSize 45
-	PlayAlertSound 2 300                 # DROPSOUND: Value Drop: Currency, fragments
+	SetTextColor 0 0 255 255             # TEXTCOLOR:	 Cosmetic: T1 Divination card
+	SetBorderColor 0 0 255 255           # BORDERCOLOR:	 Cosmetic: T1 and T2 Divination
+	SetBackgroundColor 255 255 255 255   # BACKGROUND:	 T1 Global High Value Drop
+	PlayAlertSound 6 300                 # DROPSOUND:	 T1 Drop
+
+#------------------------------------
+#   [1403] T2 - Great cards
+#------------------------------------
+
+Show # %TB-Divination-T2
+	Class "Divination"
+	BaseType "Chaotic Disposition" "The Void" "The Cartographer" "The Dapper Prodigy" "The Vast" "The Dark Mage" "Last Hope" "The Valkyrie" "The Sephirot" "The Hoarder" "The Chains that Bind" "The Warlord" "The Aesthete" "Saint's Treasure" "The Thaumaturgist" "Heterochromia" "The Porcupine" "The Stormcaller" "The Soul" "Emperor of Purity"
+	SetFontSize 44
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 255 255 0 255         # BORDERCOLOR:	 Crafting: T1
+	SetBackgroundColor 100 250 250 245   # BACKGROUND:	 T2 Divination
+	PlayAlertSound 2 300                 # DROPSOUND:	 Value Drop: Currency, fragments
+
+#------------------------------------
+#   [1404] T3 - Decent cards
+#------------------------------------
+
+Show # %TB-Divination-T3
+	Class "Divination"
+	BaseType "The Road to Power" "The Arena Champion" "The Gladiator" "Glimmer of Hope" "The Tyrant" "The Union" "The Risk" "The Trial" "Scholar of the Seas" "Lucky Deck" "Humility" "The Penitent" "The Penitent" "The Surveyor" "Lysah's Respite" "The Inventor" "The Jester" "Vinia's Token" "Rats" "The Wrath" "Hope" "Treasure Hunter" "The Explorer" "The Body" "Jack in the Box" "The Traitor" "Valley of Steel Boxes" "Wolven King's Bite" "Wretched" "The Opulent" "Might is Right" "The Fletcher" "The Forsaken" "The Formless Sea" "The Demoness" "Time-Lost Relic" "The Wolf" "Earth Drinker" "Standoff" "Merciless Armament"
+	SetFontSize 40
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 0 255 255           # BORDERCOLOR:	 Cosmetic: T1 and T2 Divination
+	SetBackgroundColor 50 220 240 235    # BACKGROUND:	 T3 Divination
+	PlayAlertSound 2 300                 # DROPSOUND:	 Value Drop: Currency, fragments
+
+#------------------------------------
+#   [1405] T5 - Format trash tier cards... before
+#------------------------------------
+
+Show # %H3 %TB-Divination-T5
+	Class "Divination"
+	BaseType "Carrion Crow" "Other Cheek" "Hermit" "King's Blade" "Thunderous Skies" "Metalsmith's Gift"
+	SetFontSize 32
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 0 0                 # BORDERCOLOR:	 Cosmetic: Neutral Highlight
+	SetBackgroundColor 175 215 230 180   # BACKGROUND:	 T5 Divination
+
+#------------------------------------
+#   [1406] T4 - ...showing the remaining cards
+#------------------------------------
+
+Show
+	Class "Divination"
+	SetFontSize 38
+	SetTextColor 0 0 0 255               # TEXTCOLOR:	 Cosmetic: Black Text
+	SetBorderColor 0 100 150 255         # BORDERCOLOR:	 Cosmetic: T4 Divination
+	SetBackgroundColor 145 215 230 225   # BACKGROUND:	 T4 Divination
+	PlayAlertSound 2 300                 # DROPSOUND:	 Value Drop: Currency, fragments
 
 # -------------------------------------------------------------------
 # [8001] Junk - Hide and shrink equipment that is not covered by any previous blocks
